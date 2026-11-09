@@ -64,8 +64,8 @@
 
   <section class="card section" id="report">
     <h2>🔎 Lost &amp; Found Report</h2>
-    <p class="form-note">This is a visual prototype. The form is not connected to a database yet, so do not enter private or sensitive information.</p>
-    <form onsubmit="event.preventDefault();alert('This is a demo form. Database connection will be added in the next step.');">
+    <p class="form-note"Submit a lost or found item report. Please do not share private or sensitive information..</p>
+    <form>
       <label for="type">I want to</label>
       <select id="type" required><option value="">Choose one</option><option>Report a lost item</option><option>Report a found item</option></select>
       <label for="item">Item name</label><input id="item" placeholder="e.g. Notebook, water bottle" required>
@@ -73,7 +73,7 @@
       <label for="details">Short description</label><textarea id="details" placeholder="Describe the item briefly"></textarea>
       <label for="contact">Contact method (demo only)</label><input id="contact" placeholder="Will be replaced by a safer contact system">
       <p class="form-note">For privacy, the live version should avoid publicly displaying phone numbers or student IDs.</p>
-      <button class="btn" type="submit">Submit demo report</button>
+      <button class="btn" type="submit">Submit Report</button>
     </form>
   </section>
 </main>
@@ -122,7 +122,7 @@ document.querySelector("#report form").addEventListener(
       alert("Submission failed: " + error.message);
     } finally {
       button.disabled = false;
-      button.textContent = "Submit demo report";
+      button.textContent = "Submit Report";
     }
   },
   true
