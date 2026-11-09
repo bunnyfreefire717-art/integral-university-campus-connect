@@ -78,5 +78,55 @@
   </section>
 </main>
 <footer>Integral University Campus Connect · Student-support project prototype</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://pnjgkkdkglegtgjvytvn.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_PaCeZeRL_Jk0Sh1uGuXVyA_BP7DwdaG";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+document.querySelector("#report form").addEventListener(
+  "submit",
+  async function(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const button = this.querySelector("button[type='submit']");
+    button.disabled = true;
+    button.textContent = "Submitting...";
+
+    const report = {
+      item_type: document.getElementById("type").value,
+      item_name: document.getElementById("item").value.trim(),
+      location: document.getElementById("place").value.trim(),
+      description: document.getElementById("details").value.trim()
+    };
+
+    try {
+      const { error } = await db
+        .from("lost_found_reports")
+        .insert([report]);
+
+      if (error) throw error;
+
+      alert("Report submitted successfully!");
+
+      this.reset();
+
+    } catch (error) {
+      console.error(error);
+      alert("Submission failed: " + error.message);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Submit demo report";
+    }
+  },
+  true
+);
+        </script>
 </body>
 </html>
